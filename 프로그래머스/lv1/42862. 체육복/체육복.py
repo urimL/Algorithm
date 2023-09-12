@@ -1,22 +1,25 @@
 def solution(n, lost, reserve):
-    answer=n-len(lost)
+    answer=0
     lost.sort()
     
-    for i in lost:
-        if i in reserve:
+    for i in range(1,n+1):
+        #잃어버리지 않은 학생
+        if i not in lost:
             answer+=1
-            lost[lost.index(i)]=-10
-            reserve[reserve.index(i)] =-10
+        #잃어버렸으나 여분이 있는 학생
+        else:
+            if i in reserve:
+                answer+=1
+                lost.remove(i)
+                reserve.remove(i)
     
     for i in lost:
         if i-1 in reserve:
             answer+=1
-            reserve[reserve.index(i-1)] = -10
-            continue
+            reserve.remove(i-1)
             
-        if i+1 in reserve:
+        elif i+1 in reserve:
             answer+=1
-            reserve[reserve.index(i+1)] = -10
-            continue
+            reserve.remove(i+1)
         
     return answer
