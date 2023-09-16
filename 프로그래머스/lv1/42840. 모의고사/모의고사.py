@@ -13,6 +13,7 @@ def solution(answers):
             score[1]+=1
         if answers[i]==how3[i%len(how3)]:
             score[2]+=1
+        
             
     max_score = max(score)
     
