@@ -1,16 +1,7 @@
-def solution(arr):
-    answer = 0
-    n = 1                           
-    
-    while True:
-        answer = max(arr) * n 
-        result = True               
-        for num in arr:
-            if answer % num != 0:   
-                result = False      
-                break
-        if result:                  
-            break                   
-        n += 1
-        
+import math
+def solution(num):      
+    answer = num[0]
+    for n in num:
+        answer = (n * answer) // math.gcd(n, answer)
+
     return answer
