@@ -2,7 +2,7 @@ def solution(p,s):
     answer = []
     day,cnt = 0,0
     days = []
-    st = []
+    q = []
     
     for i in range(len(p)):
         if (100-p[i])%s[i]!=0:
@@ -13,15 +13,14 @@ def solution(p,s):
         days.append(day)
         
     for i in range(len(days)):
-        if not st or st[0]>=days[i]:
-            st.append(days[i])
+        if not q or q[0]>=days[i]:
+            q.append(days[i])
             cnt+=1
         else:
-            while st:
-                st.pop()
+            q.clear()
             answer.append(cnt)
             cnt = 1
-            st.append(days[i])
+            q.append(days[i])
     answer.append(cnt)
     
     return answer
