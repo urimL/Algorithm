@@ -7,7 +7,7 @@ def solution(numbers):
     
     #소수찾기
     def is_prime_num(n):
-        if n==1:
+        if n==1 or n==1:
             return False
         for i in range(2, int(math.sqrt(n))+1): # n의 제곱근을 정수화 시켜준 후 + 1
             if n % i == 0:
