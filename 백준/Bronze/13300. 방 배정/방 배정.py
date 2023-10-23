@@ -15,13 +15,13 @@ for i in range(n):
 
 
 for i,j in zip(girl,boy):
-    if i > k:
+    if i%k==0:
+        answer+=i//k
+    elif i%k!=0:
         answer+=i//k+1
-    elif 0<i<=k:
-        answer+=1
-    if j > k:
+    if j%k==0:
+        answer+=j//k
+    elif j%k!=0:
         answer+=j//k+1
-    elif 0<j<=k:
-        answer+=1
 
 print(answer)
