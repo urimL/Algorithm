@@ -1,11 +1,6 @@
 def solution(dots):
     answer = 0
-    x_dots,y_dots = [],[]
     
-    for i in dots:
-        x_dots.append(i[0])
-        y_dots.append(i[1])
-    
-    answer = (max(x_dots)-min(x_dots))*(max(y_dots)-min(y_dots))
+    answer = (max(dots)[0]-min(dots)[0])*(max(dots)[1]-min(dots)[1])
     
     return answer
