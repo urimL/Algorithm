@@ -5,7 +5,19 @@ input = sys.stdin.readline
 n,m = map(int,input().split())
 arr = list(map(int,input().split()))
 arr.sort()
+s = []
 
-com = combinations(arr,m)
-for i in com:
-    print(" ".join(map(str,i)))
+
+def dfs():
+    if len(s)==m:
+        print(" ".join(map(str,s)))
+        return
+    for i in arr:
+        if s and s[-1]>=i:
+            continue
+        if i not in s:
+            s.append(i)
+            dfs()
+            s.pop()
+
+dfs()
