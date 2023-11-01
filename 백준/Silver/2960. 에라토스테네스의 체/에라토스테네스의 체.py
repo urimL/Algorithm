@@ -9,8 +9,8 @@ answer=0
 
 for i in range(2,n+1):
   
-    for j in range(i,n+1):
-        if j%i==0 and check[j]:
+    for j in range(i,n+1,i):
+        if check[j]:
             check[j]=False
             answer+=1
 
