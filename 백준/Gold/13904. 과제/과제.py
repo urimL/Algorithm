@@ -1,30 +1,30 @@
+import sys
 import heapq
 
-n = int(input())
+input = sys.stdin.readline
 
-hq = []
-max_day = 0
+n = int(input())
+hw = []
+total_deadline = 0
+
 for i in range(n):
     d, w = map(int, input().split())
-    heapq.heappush(hq, (-w, d))
-    if max_day < d:
-        max_day = d
+    heapq.heappush(hw, [-w, d])
+    if total_deadline < d:
+        total_deadline = d
 
-assigned = [False] * (max_day + 1)
+visited = [False] * (total_deadline + 1)
+answer = 0
 
-score = 0
-while hq:
-    # 가장 스코어 높은 순으로 가져와서
-    w, d = heapq.heappop(hq)
-    w = -w
+while hw:
+    w, d = heapq.heappop(hw)
 
-    # d일부터 1일 까지 거꾸로 돌면서 비어있는 날 중에 최대한 늦게 배정
     for i in range(d, 0, -1):
-        if assigned[i]:
+        if visited[i]:
             continue
 
-        assigned[i] = True
-        score += w
+        visited[i] = True
+        answer += -w
         break
 
-print(score)
+print(answer)
