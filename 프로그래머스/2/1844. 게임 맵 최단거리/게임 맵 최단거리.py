@@ -1,33 +1,30 @@
 from collections import deque
+
 def solution(maps):
-    answer = 0
-    dx = [-1,1,0,0]
-    dy = [0,0,-1,1]
+    dx = [1,0,-1,0]
+    dy = [0,1,0,-1]
+    visited = [[False]*len(maps[0]) for _ in range(len(maps))]
     
     def bfs(x,y):
         q = deque()
-        q.append((x,y))
+        q.append([x,y])
         
         while q:
-            x,y = q.popleft()
-            for i in range(4):
-                nx = x+dx[i]
-                ny = y+dy[i]
+            a, b = q.popleft()
             
-                if nx<0 or nx>=len(maps) or ny<0 or ny>=len(maps[0]):
-                    continue
-                if maps[nx][ny]==0:
-                    continue
-                if maps[nx][ny]==1:
-                    maps[nx][ny] = maps[x][y]+1
-                    q.append((nx,ny))
-    
+            for i in range(4):
+                nx = dx[i] + a
+                ny = dy[i] + b
+                
+                if 0<=nx<len(maps) and 0<=ny<len(maps[0]) and maps[nx][ny] == 1:
+                    visited[nx][ny] = True
+                    maps[nx][ny] = maps[a][b]+1
+                    q.append([nx,ny])
+
+    bfs(0,0)
+    if maps[len(maps)-1][len(maps[0])-1] == 1:
+        return -1
+    else:
         return maps[len(maps)-1][len(maps[0])-1]
-                                 
-                                 
-    answer = bfs(0,0)
-    return -1 if answer==1 else answer
-                                 
-    
-    
+                    
         
