@@ -1,7 +1,6 @@
 from itertools import product
 
 def solution(word):
-    answer = 0
     total = set()
     alphabet = ['A','E','I','O','U','']
     
@@ -14,7 +13,5 @@ def solution(word):
     total = list(total)
     total.sort()
     
-    for t in total:
-        if t == word:
-            return answer
-        answer += 1
+    idx = total.index(word)
+    return idx
