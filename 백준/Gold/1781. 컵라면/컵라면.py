@@ -1,23 +1,21 @@
-import sys
 import heapq
+import sys
 
 input = sys.stdin.readline
-
 n = int(input())
-arr = []
+hq = []
+nums = []
 answer = 0
 
-for _ in range(n):
-    d, l = map(int, input().split())
-    arr.append([d,l])
+for i in range(n):
+    d, r = map(int, input().split())
+    nums.append([d,r])
 
-arr.sort()
-q = []
+nums.sort()
 
-for d,l in arr:
-    heapq.heappush(q, l)
-    if d < len(q):
-        heapq.heappop(q)
+for d,r in nums:
+    heapq.heappush(hq, r)
+    if d < len(hq):
+        heapq.heappop(hq)
 
-print(sum(q))
-
+print(sum(hq))
