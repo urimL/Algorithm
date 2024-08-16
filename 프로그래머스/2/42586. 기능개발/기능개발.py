@@ -1,26 +1,27 @@
-def solution(p,s):
+from collections import deque
+def solution(progresses,speeds):
     answer = []
-    day,cnt = 0,0
-    days = []
-    q = []
+    q = deque()
+    cnt = 0
     
-    for i in range(len(p)):
-        if (100-p[i])%s[i]!=0:
-            day = (100-p[i])//s[i]+1
+    for i in range(len(speeds)):
+        if (100-progresses[i])%speeds[i] == 0:
+            day = (100-progresses[i])//speeds[i]
         else:
-            day = (100-p[i])//s[i]
+            day = (100-progresses[i])//speeds[i]+1
+        q.append(day)
+
+    while q:
+        now = q.popleft()
+        answer.append(1)
         
-        days.append(day)
-        
-    for i in range(len(days)):
-        if not q or q[0]>=days[i]:
-            q.append(days[i])
-            cnt+=1
-        else:
-            q.clear()
-            answer.append(cnt)
-            cnt = 1
-            q.append(days[i])
-    answer.append(cnt)
+        while q:
+            if q and now >= q[0]:
+                answer[-1] += 1
+                q.popleft()
+            else:
+                break
     
+    print(answer)
     return answer
+            
