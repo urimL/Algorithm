@@ -1,6 +1,7 @@
 def solution(number, k):
     answer = ''
     st = []
+    #삭제한 수의 개수
     cnt = 0
     
     for i in range(len(number)):
@@ -14,6 +15,7 @@ def solution(number, k):
                     break
             st.append(number[i])
     
+    #st안의 숫자의 개수가 많을 경우
     if cnt!=k:
         for i in range(k-cnt):
             st.pop()
