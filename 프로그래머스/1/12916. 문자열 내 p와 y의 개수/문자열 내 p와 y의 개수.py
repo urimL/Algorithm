@@ -1,0 +1,7 @@
+def solution(s):
+    answer = True
+    s = s.lower()
+    p = s.count('p')
+    y = s.count('y')    
+
+    return (p==y)
