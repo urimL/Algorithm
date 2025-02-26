@@ -4,27 +4,32 @@ import java.io.*;
 
 public class Main{
     public static void main(String[] args) throws IOException{
-    	ArrayList<Integer> list = new ArrayList<>();
-    	Scanner sc = new Scanner(System.in);
-    	int n = sc.nextInt();
-    	int m = sc.nextInt();
+    	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    	StringTokenizer st = new StringTokenizer(br.readLine());
     	
-    	for (int i=1;i<=n;i++) {
-    		list.add(i);
+    	int n = Integer.parseInt(st.nextToken());
+    	int m = Integer.parseInt(st.nextToken());
+    	
+    	int[] arr = new int[n];
+    	for (int i=0;i<n;i++) {
+    		arr[i] = i+1;
     	}
     	
-    	for (int i = 0;i<m;i++) {
-    		int f = sc.nextInt() - 1;
-    		int s = sc.nextInt() - 1;
+    	for (int i=0;i<m;i++) {
+    		st = new StringTokenizer(br.readLine());
+    		int f = Integer.parseInt(st.nextToken())-1;
+    		int s = Integer.parseInt(st.nextToken())-1;
     		
-    		int tmp = list.get(f);
-    		list.set(f, list.get(s));
-    		list.set(s, tmp);
+    		int tmp = arr[f];
+    		arr[f] = arr[s];
+    		arr[s] = tmp;
+    		
     	}
     	
-    	for (int v : list) 
-    		System.out.print(v + " ");
-    	
+    	StringBuilder s = new StringBuilder();
+    	for (int v: arr) {
+    		s.append(v).append(" ");
+    	}
+    	System.out.println(s.toString().trim());
     }
-    
-} 
+}
