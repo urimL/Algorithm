@@ -7,17 +7,15 @@ public class Main{
     	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     	
     	int n = Integer.parseInt(br.readLine());
-    	Stack<Character> stack;
+    	Stack<Character> stack = new Stack<>();
     	StringBuilder sb = new StringBuilder();
     	
     	for (int i=0;i<n;i++) {
     		String answer = "YES";
-
-    	 	stack = new Stack<>();
     		String input = br.readLine();
+    		stack.clear();
     		
-    		for (int j=0;j<input.length();j++) {
-    			char c = input.charAt(j);
+    		for (char c : input.toCharArray()) {
     			
     			if (c=='(') {
     				stack.push(c);
@@ -25,9 +23,7 @@ public class Main{
     				answer = "NO";
     				break;
     			} else {
-    				if (stack.peek() == '(') {
-    					stack.pop();
-    				}
+    				stack.pop();
     			}
     		}
     		
