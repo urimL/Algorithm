@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 
 public class Main{
-	static int[][] map;
+	static List<List<Integer>> map = new ArrayList<>();
 	static boolean[] visited;
 	static int answer = 0;
 	
@@ -14,11 +14,11 @@ public class Main{
 		while (!q.isEmpty()) {
 			int now = q.poll();
 			
-			for (int i=0;i<map.length;i++) {
-				if (map[now][i] == 1 && !visited[i]) {
-					visited[i] = true;
+			for (int n: map.get(now)) {
+				if (!visited[n]) {
+					visited[n] = true;
 					answer++;
-					q.add(i);					
+					q.add(n);
 				}
 			}
 		}
@@ -29,15 +29,18 @@ public class Main{
     	StringTokenizer st;
     	int n = Integer.parseInt(br.readLine());
     	int m = Integer.parseInt(br.readLine());
-    	map = new int[n+1][n+1];
+    	
     	visited = new boolean[n+1];
+    	map = new ArrayList<>();
+    	for (int i=0;i<=n;i++) map.add(new ArrayList<>());
     	
     	for(int i=0;i<m;i++) {
     		st = new StringTokenizer(br.readLine());
     		int s = Integer.parseInt(st.nextToken())-1;
     		int e = Integer.parseInt(st.nextToken())-1;
     		
-    		map[s][e] = map[e][s] = 1;    		
+    		map.get(e).add(s);
+    		map.get(s).add(e); 		
     	}
     	
     	bfs(0);
