@@ -1,18 +1,21 @@
+from itertools import combinations
+
 def solution(clothes):
     answer = 0
-    cnt = 1
-    total = {}
+    dic = dict()
     
-    for i in clothes:
-        if i[1] in total.keys():
-            total[i[1]].append(i[0])
+    for c in clothes:
+        name, category = c
+        if category in dic.keys():
+            dic[category].append(name)
         else:
-            total[i[1]] = [i[0]]
+            dic[category] = [name]
     
-    for i in total.keys():
-        cnt*=(len(total[i])+1)
+    cnt = 1
+    for key in dic.keys():
+        cnt *= (len(dic[key])+1)
     
-    answer+=cnt
-    answer-=1
-        
-    return answer
+    answer += cnt   
+    
+    return answer-1
+            
