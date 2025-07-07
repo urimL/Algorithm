@@ -1,11 +1,17 @@
 def solution(nums):
     answer = 0
-    d = len(set(nums))
+    dic = dict()
+    total = len(nums)//2
     
-    if d>=len(nums)//2:
-        answer=len(nums)/2
+    for n in nums:
+        if n in dic:
+            dic[n] += 1
+        else:
+            dic[n] = 1
+    
+    if len(dic) >= total:
+        answer = total
     else:
-        answer=d
-        
+        answer = len(dic)
     
     return answer
