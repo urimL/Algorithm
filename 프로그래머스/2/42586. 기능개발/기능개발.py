@@ -1,20 +1,22 @@
-from collections import deque
 import math
-
 def solution(progresses, speeds):
     answer = []
-    st = []
+    days = []
     
-    for i in range(len(speeds)-1, -1, -1):
-        st.append([i, math.ceil((100-progresses[i])/speeds[i])])
-        
-    remains = 101
-    while st:
-        cnt = 0
-        remains = st[-1][1]
-        while st and st[-1][1] <= remains:
-            st.pop()
+    for p,s in zip(progresses, speeds):
+        days.append([p,math.ceil((100-p)/s)])
+    
+    days = days[::-1]
+    print(days)
+    now = days.pop()[1]
+    cnt = 1
+    while days:
+        tmp = days.pop()[1]
+        if now >= tmp:
             cnt += 1
-        answer.append(cnt)
-
+        else:
+            answer.append(cnt)
+            cnt = 1
+            now = tmp
+    answer.append(cnt)
     return answer
