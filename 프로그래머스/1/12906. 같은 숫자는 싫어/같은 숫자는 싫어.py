@@ -1,13 +1,9 @@
 def solution(arr):
     answer = []
-    now = -1
-    
-    for i in arr:
-        if now != i:
-            answer.append(i)
-            now = i
-        else:
+    for a in arr:
+        if not answer:
+            answer.append(a)
             continue
-    
-    
+        if answer[-1] != a:
+            answer.append(a)
     return answer
