@@ -1,21 +1,15 @@
-from itertools import combinations
-
 def solution(clothes):
-    answer = 0
-    dic = dict()
+    answer = 1
+    d = {}
     
     for c in clothes:
         name, category = c
-        if category in dic.keys():
-            dic[category].append(name)
+        if category not in d:
+            d[category] = [name]
         else:
-            dic[category] = [name]
+            d[category].append(name)
     
-    cnt = 1
-    for key in dic.keys():
-        cnt *= (len(dic[key])+1)
-    
-    answer += cnt   
-    
-    return answer-1
-            
+    for i in d:
+        answer *= len(d[i]) + 1 
+        
+    return answer -1
