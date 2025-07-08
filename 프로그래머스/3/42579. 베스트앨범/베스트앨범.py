@@ -1,25 +1,23 @@
 def solution(genres, plays):
     answer = []
+    music = {}    
     total = {}
-    g_play = {}
     
-    for i in range(len(plays)):
-        if genres[i] in total.keys():
-            total[genres[i]]+=plays[i]
-            g_play[genres[i]].append((plays[i],i))
+    for i in range(0, len(plays)):
+        g, p = genres[i], plays[i]
+        if g not in music:
+            music[g] = [[i,p]]
+            total[g] = p
         else:
-            total[genres[i]] = plays[i]
-            g_play[genres[i]] = [(plays[i],i)]
+            music[g].append([i,p])
+            total[g] += p
     
-    total = sorted(total.items(), key=lambda x:x[1],reverse=True)
-    
-    for k in total:
-        playlist = g_play[k[0]]
-        playlist = sorted(playlist,key=lambda x:x[0],reverse=True)
+    total = dict(sorted(total.items(), key = lambda x: x[1], reverse = True))
+
+    for t in total:
+        music[t].sort(key = lambda x : x[1], reverse = True)
         
-        for i in range(len(playlist)):
-            if i==2:
-                break
-            answer.append(playlist[i][1])
+        for i in music[t][0:2]:
+            answer.append(i[0])
     
     return answer
