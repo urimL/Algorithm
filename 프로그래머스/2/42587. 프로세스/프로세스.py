@@ -1,22 +1,21 @@
 from collections import deque
 
 def solution(priorities, location):
-    answer = 1
+    answer = 0
+    MAX = max(priorities)
     q = deque()
-    
-    #[프로세스, 우선순위]
-    for i in range(len(priorities)):
-        q.append([i, priorities[i]])
-        
-    while q:
-        max_p = max(q, key = lambda x:x[1])[1]
-        num, p = q.popleft()
-        if p >= max_p:
-            if num == location:
-                break
-            else:
-                answer += 1
-        else:
-            q.append([num,p])
 
+    for p in range(len(priorities)):
+        q.append([priorities[p], p])
+    
+    while q:
+        now = q.popleft()
+        if now[0] < MAX:
+            q.append(now)
+        else:
+            answer += 1
+            if now[1] == location:
+                return answer
+            MAX = max(q, key=lambda x: x[0])[0]
+    
     return answer
