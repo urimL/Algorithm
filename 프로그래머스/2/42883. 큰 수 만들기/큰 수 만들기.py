@@ -1,25 +1,17 @@
 def solution(number, k):
-    answer = ''
+    num = list(map(int, list(number))) 
+    total = len(num)
     st = []
-    #삭제한 수의 개수
     cnt = 0
     
-    for i in range(len(number)):
-        if not st or st[-1]>=number[i] or cnt>=k:
-            st.append(number[i])
-        else:
-            while st[-1]<number[i]:
-                st.pop()
-                cnt+=1
-                if not st or cnt==k:
-                    break
-            st.append(number[i])
-    
-    #st안의 숫자의 개수가 많을 경우
-    if cnt!=k:
-        for i in range(k-cnt):
+    for n in num:
+        cnt += 1
+        while st and st[-1] < n and k > 0:
             st.pop()
-        
-
-    answer = "".join(st)
+            k -= 1
+        if k + len(st) == total and cnt == total:
+            break
+        st.append(n)
+       
+    answer = "".join(list(map(str, list(st))))
     return answer
