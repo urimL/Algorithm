@@ -14,4 +14,5 @@ def solution(number, k):
         st.append(n)
        
     answer = "".join(list(map(str, list(st))))
+    
     return answer
