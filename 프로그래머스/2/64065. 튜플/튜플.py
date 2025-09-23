@@ -1,14 +1,19 @@
 def solution(s):
-    t,answer = [],[]
-    for i in s.split("},"):
-        t.append(i.replace("{","").replace("}","").split(","))
-        
-    t.sort(key = lambda x:len(x))
+    answer = []
+    result = []
     
-    for i in t:
-        for j in i:
-            if int(j) not in answer:
-                answer.append(int(j))
-                
+    s = s.split("},")
+    for i in s:
+        tmp = i.replace("{","").replace("}","").split(",")
+        result.append(tmp)
+        
+    result.sort(key = len)
+
+    for r in result:
+        for i in r:
+            if i not in answer:
+                answer.append(i)
+    
+    answer = list(map(int,answer))
     return answer
     
