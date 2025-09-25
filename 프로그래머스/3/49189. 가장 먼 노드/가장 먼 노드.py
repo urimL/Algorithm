@@ -1,26 +1,28 @@
 from collections import deque
-
 def solution(n, edge):
     answer = 0
     graph = [[] for _ in range(n+1)]
-    count = [-1]*(n+1)
-    
-    for i in edge:
-        v,e = i
-        graph[v].append(e)
-        graph[e].append(v)
-        
     q = deque([1])
-    count[1] = 0
+    visited = [0 for _ in range(n+1)]
+    visited[1] = 1
+    
+    for e,v in edge:
+        graph[e].append(v)
+        graph[v].append(e)
     
     while q:
         now = q.popleft()
+        cnt = 1
         
-        for i in graph[now]:
-            if count[i] == -1:
-                q.append(i)
-                count[i] = count[now]+1
+        for x in graph[now]:
+            if visited[x] == 0:
+                visited[x] = visited[now] + 1
+                q.append(x)
+            
+    max_value = max(visited)
+    for i in range(1, n+1):
+        if visited[i] == max_value:
+            answer += 1
     
-    answer = count.count(max(count))
-        
+    
     return answer
