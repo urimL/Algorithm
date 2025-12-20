@@ -1,21 +1,21 @@
 from collections import deque
+
 def solution(prices):
-    answer = [0] * len(prices)
-    st = []
+    answer = [0 for _ in range(len(prices))] 
+    q = deque() 
+    new_prices = []
     for i in range(len(prices)):
-        if not st or st[-1][0] <= prices[i]:
-            st.append([prices[i], i])
+        new_prices.append([i, prices[i]])
+    
+    for p in new_prices:
+        while q and q[-1][1] > p[1]:
+            answer[q[-1][0]] = p[0] - q[-1][0]
+            q.pop()
         else:
-            while st and st[-1][0] > prices[i]:
-                now = st.pop()
-                answer[now[1]] += i - now[1]
-            st.append([prices[i],i])
-        
-    cnt = 0
-    print(st)
-    while st:
-        total = len(prices) - 1
-        now = st.pop()
-        answer[now[1]] += total - now[1]
-        
+            q.append(p)
+    
+    while q:
+        answer[q[0][0]] = len(prices) - q[0][0]-1
+        q.popleft()
+    
     return answer
