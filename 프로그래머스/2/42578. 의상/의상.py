@@ -1,15 +1,18 @@
-def solution(clothes):
+def solution(cloth):
     answer = 1
-    d = {}
+    clothes = dict()
     
-    for c in clothes:
-        name, category = c
-        if category not in d:
-            d[category] = [name]
+    for n,c in cloth:
+        if c not in clothes:
+            clothes[c] = [n]
         else:
-            d[category].append(name)
+            clothes[c].append(n)
     
-    for i in d:
-        answer *= len(d[i]) + 1 
-        
-    return answer -1
+    total_cnt = len(clothes)
+    for c in clothes:
+        tmp = len(clothes[c])
+        if total_cnt == 1:
+            return tmp
+        answer *= tmp + 1
+    
+    return answer - 1
