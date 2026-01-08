@@ -1,11 +1,8 @@
 def solution(numbers):
-    answer = [0 for _ in range(len(numbers))]
+    answer = [-1 for _ in range(len(numbers))]
     st, num = [], []
-    
-    for idx,n in enumerate(numbers):
-        num.append([idx, n])
-        
-    for idx, n in num:
+ 
+    for idx, n in enumerate(numbers):
         if not st:
             st.append([idx,n])
             continue
@@ -14,7 +11,4 @@ def solution(numbers):
             answer[now[0]] = n
         st.append([idx,n])
 
-    for idx, n in st:
-        answer[idx] = -1
-        
     return answer
