@@ -1,23 +1,23 @@
 def solution(gems):
     answer = []
-    kind = len(set(gems))
-    dic = {}
+    category = len(set(gems))
+    gemNow = dict()
     start = 0
     
-    for end in range(len(gems)):
-        if gems[end] in dic:
-            dic[gems[end]] += 1
+    for i in range(len(gems)):
+        if gems[i] not in gemNow:
+            gemNow[gems[i]] = 1
         else:
-            dic[gems[end]] = 1
+            gemNow[gems[i]] += 1
         
-        while len(dic) == kind:
-            answer.append([start+1, end +1])
-            dic[gems[start]] -= 1
+        while len(gemNow) == category:
+            answer.append([start+1, i+1])
+            gemNow[gems[start]] -= 1
             
-            if dic[gems[start]] == 0:
-                del dic[gems[start]]
-            start += 1
-            
-    answer.sort(key = lambda x:x[1]-x[0])
+            if gemNow[gems[start]] == 0:
+                del gemNow[gems[start]]
+            start += 1  
+    
+    answer.sort(key = lambda x:(x[1] - x[0], x[0]))
     
     return answer[0]
