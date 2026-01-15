@@ -1,17 +1,19 @@
 def solution(people, limit):
     answer = 0
-    result = [False] * len(people)
+    n = len(people)
+    
     people.sort()
-    
-    start, end = 0, len(people)-1
-    
+
+    start, end = 0, n-1
     while start < end:
-        s = people[start]+people[end]
-        if  s <= limit:
-            result[start], result[end] = True, True
+        if people[start] + people[end] <= limit:
             answer += 1
             start += 1
-            
-        end -= 1
+            end -= 1
+        else:
+            end -= 1
     
-    return answer + result.count(False)
+    answer += n - 2*answer
+    
+    
+    return answer
