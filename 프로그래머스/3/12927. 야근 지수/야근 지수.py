@@ -1,19 +1,19 @@
 import heapq
 
 def solution(n, works):
-    if sum(works) <= n :
-        return 0
-    
     answer = 0
     
+    if sum(works) <= n:
+        return 0
+    
     works = [-w for w in works]
-    heapq.heapify(works) #work를 힙으로 변환
+    heapq.heapify(works)
     
-    for i in range(n):
-        max_v = heapq.heappop(works)
-        heapq.heappush(works, max_v+1)
+    while n > 0:
+        now = heapq.heappop(works)
+        heapq.heappush(works, now + 1)
+        n -= 1
     
-    for i in works:
-        answer+=i**2
+    answer = sum(x**2 for x in works)
         
     return answer
