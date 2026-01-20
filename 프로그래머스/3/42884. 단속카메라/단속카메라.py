@@ -1,21 +1,12 @@
 def solution(routes):
     answer = 0
     
-    start, end = -30001,30001
-    routes.sort()
-    tmp = [0,0]
+    routes.sort(key = lambda x:x[1])
+    start, end = -30001, -30001
     
-    for i in range(len(routes)):
-        if i == len(routes)-2:
-            tmp = routes[i]
-            
-        if end >= routes[i][0]:
-            start, end = max(start, routes[i][0]), min(end, routes[i][1])
-        else:
+    for s,e in routes:
+        if end < s:
             answer += 1
-            start, end = routes[i]
-            
-    if [start, end] != tmp:
-        answer += 1
-        
+            start, end = s, e
+
     return answer
